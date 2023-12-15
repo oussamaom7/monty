@@ -14,36 +14,39 @@ void execute_instruction(char *line, stack_t **stack)
 
     opcode = strtok(line, " \t\n");
     if (opcode == NULL || opcode[0] == '#')
-        return; // Ignore empty lines and comments
+        return; 
 
     if (strcmp(opcode, "push") == 0)
     {
         value_str = strtok(NULL, " \t\n");
         if (value_str == NULL)
         {
-            fprintf(stderr, "Error: usage: push integer\n");
+            fprintf(stderr, "L%u: usage: push integer\n", 0); 
             exit(EXIT_FAILURE);
         }
 
         value = atoi(value_str);
-        push(stack, 0, value); // Adjust line_number accordingly
+        push(stack, 0, value); 
+    }
+    else if (strcmp(opcode, "pint") == 0)
+    {
+        pint_opcode(stack, 0); 
     }
     else
     {
-        // Look for the opcode in the list and execute its associated function
+        
         int i = 0;
         while (opcodes[i].opcode != NULL)
         {
             if (strcmp(opcodes[i].opcode, opcode) == 0)
             {
-                opcodes[i].f(stack, 0); // Adjust line_number accordingly
+                opcodes[i].f(stack, 0); 
                 return;
             }
             i++;
         }
 
-        // Opcode not found
-        fprintf(stderr, "L%d: unknown instruction %s\n", 0, opcode); // Adjust line_number accordingly
+        fprintf(stderr, "L%d: unknown instruction %s\n", 0, opcode); 
         exit(EXIT_FAILURE);
     }
 }

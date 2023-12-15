@@ -4,13 +4,12 @@
 #include <stdlib.h>
 
 /**
- * struct stack_s - doubly linked list representation of a stack (or queue)
+ * struct stack_s - doubly linked list representation of a stack
  * @n: integer
- * @prev: points to the previous element of the stack (or queue)
- * @next: points to the next element of the stack (or queue)
+ * @prev: points to the previous element of the stack
+ * @next: points to the next element of the stack
  *
- * Description: doubly linked list node structure
- * for stack, queues, LIFO, FIFO
+ * Description: doubly linked list node structure for stack
  */
 typedef struct stack_s
 {
@@ -25,7 +24,6 @@ typedef struct stack_s
  * @f: function to handle the opcode
  *
  * Description: opcode and its function
- * for stack, queues, LIFO, FIFO
  */
 typedef struct instruction_s
 {
@@ -33,5 +31,6 @@ typedef struct instruction_s
     void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-#endif /* MONTY_H */
+void pint_opcode(stack_t **stack, unsigned int line_number);
 
+#endif /* MONTY_H */
